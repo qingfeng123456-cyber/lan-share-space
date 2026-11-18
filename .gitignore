@@ -1,0 +1,28 @@
+# Local server binaries, generated state, and shared files
+copyparty.exe
+/runtime/
+/data/
+/share/
+/shared/
+/.copyparty/
+
+# Local configuration and credentials
+*.conf
+*.local
+*.env
+.env
+.env.*
+*.pem
+*.key
+*.pfx
+*.p12
+
+# Runtime logs and Windows/editor files
+*.log
+*.pid
+*.tmp
+Thumbs.db
+desktop.ini
+.DS_Store
+.vscode/
+.idea/

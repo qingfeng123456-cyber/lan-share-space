@@ -1,0 +1,154 @@
+/* Refined local-share interface. Keeps all copyparty controls in place. */
+html#ht_brw {
+  --lan-ink:#17243b; --lan-muted:#758297; --lan-line:#e7ebf1;
+  --lan-blue:#226fde; --lan-blue-ink:#1b62c4;
+  background:#f5f7fa; color:var(--lan-ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei UI",sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+html#ht_brw body { max-width:1440px; padding-bottom:70px; }
+html#ht_brw #lan-brand { padding:30px 4.2% 23px; }
+#lan-brand .lan-logo { width:44px; height:44px; border-radius:14px; background:linear-gradient(145deg,#71b7fc,#2874e2); box-shadow:0 8px 18px #236fdb2b; }
+#lan-brand .lan-brand-title { font-size:17px; letter-spacing:.03em; color:#1a283c; }
+#lan-brand .lan-brand-sub { color:#9aa8b9; font-size:10px; letter-spacing:.15em; }
+#lan-brand .lan-brand-status { padding:7px 10px; border-radius:20px; background:#edf8f3; color:#51846c; }
+html#ht_brw #acc_info { color:#8c99ab; }
+html#ht_brw #ops { gap:3px; padding:8px; border:1px solid #e8edf4; border-radius:16px; background:#fff; box-shadow:0 6px 24px #304b6c09; }
+html#ht_brw #ops a { min-height:38px; padding:6px 13px; border-radius:10px; transition:background .16s ease,color .16s ease; }
+html#ht_brw #ops a::after { font-size:13px; font-weight:600; }
+html#ht_brw #ops a:hover { background:#f1f5fa; color:#263c58; }
+html#ht_brw #ops a.act { background:#eaf2ff; color:#1768d3; }
+html#ht_brw #ops:not(.lan-expanded) > a.lan-extra, html#ht_brw #ops > #opa_x { display:none !important; }
+html#ht_brw #ops > #opa_up { background:#2875df; color:#fff; padding-left:18px; padding-right:18px; box-shadow:0 4px 12px #2875df33; }
+html#ht_brw #ops > #opa_up:hover, html#ht_brw #ops > #opa_up.act { background:#1765cb; color:#fff; }
+html#ht_brw #ops > #opa_mkd { border:1px solid #dce8f6; background:#f6faff; color:#286bc1; }
+html#ht_brw #ops > #opa_del::after { content:'撤销上传'; }
+html#ht_brw #ops > #opa_bup::after { content:'基础上传'; }
+html#ht_brw #path { display:inline-flex; align-items:center; gap:4px; padding:9px 14px; border-color:#e9edf4; border-radius:11px; background:#fff; box-shadow:0 3px 10px #31486908; }
+html#ht_brw #path a { color:#62738a; }
+html#ht_brw #lan-intro { display:flex; align-items:center; justify-content:space-between; gap:24px; min-height:150px; padding:28px 34px; border-color:#e3eaf4; border-radius:20px; background:linear-gradient(118deg,#fff 20%,#f5f9ff 75%,#edf5ff); box-shadow:0 8px 28px #314c7109; }
+#lan-intro .lan-eyebrow { color:#6c96c7; letter-spacing:.09em; }
+#lan-intro h1 { margin:10px 0 6px; color:#16253b; font-size:30px; }
+#lan-intro p { color:#8492a5; }
+#lan-intro .lan-actions { flex:none; margin:0; }
+#lan-intro .lan-actions button { min-height:42px; padding:10px 16px; border-radius:11px; font-size:13px; transition:transform .16s ease,box-shadow .16s ease; }
+#lan-intro .lan-actions button:hover { transform:translateY(-1px); box-shadow:0 7px 16px #2d70c51c; }
+#lan-intro .lan-actions button.lan-upload { background:#2875e1; border-color:#2875e1; box-shadow:0 6px 16px #286fd02b; }
+html#ht_brw #wrap { min-height:270px; padding:22px 28px 28px; border-color:#e8edf4; border-radius:20px; box-shadow:0 8px 28px #304b6c08; }
+html#ht_brw #files thead th { padding:14px 12px; color:#98a5b5; font-size:12px; letter-spacing:.02em; border-bottom:1px solid #edf0f5; }
+html#ht_brw #files td, html#ht_brw #files tr:nth-child(n) td { padding:15px 12px; border-bottom:1px solid #f0f3f7; }
+html#ht_brw #files tbody tr:hover td { background:#f7faff; }
+html#ht_brw #files tbody tr.sel td { background:#eaf3ff; }
+html#ht_brw #files tbody td:first-child a[id^="tf-"], html#ht_brw #files tbody td:first-child a[href*="?zip"] { display:inline-flex; align-items:center; min-height:30px; padding:0 10px; border:1px solid #deebfa; border-radius:8px; background:#f5f9ff; color:#286bc1; font-size:0; text-decoration:none; }
+html#ht_brw #files tbody td:first-child a[id^="tf-"]::after, html#ht_brw #files tbody td:first-child a[href*="?zip"]::after { font-size:12px; font-weight:600; }
+html#ht_brw #files tbody td:first-child a[id^="tf-"]::after { content:'预览'; }
+html#ht_brw #files tbody td:first-child a[href*="?zip"]::after { content:'打包下载'; }
+html#ht_brw #files tbody td:first-child a[id^="tf-"]:hover, html#ht_brw #files tbody td:first-child a[href*="?zip"]:hover { background:#e7f2ff; }
+html#ht_brw #epi { padding:42px 10px; color:#9aa7b7; text-align:center; }
+html#ht_brw #repl { display:none; }
+html#ht_brw #goh { display:none; }
+html#ht_brw #wfp { border-top:1px solid #f1f3f7; padding-top:17px; }
+html#ht_brw #wfp, html#ht_brw #wfp a { color:#9aa8b9; font-size:12px; font-weight:500; }
+html#ht_brw #tree { background:#f5f8fc; border:1px solid #e5ebf3; }
+html#ht_brw #treeh { display:flex; align-items:center; gap:4px; padding:8px; background:#f8fafd; }
+html#ht_brw #treeh a { min-width:28px; min-height:28px; border:0; border-radius:8px; background:#eef3f9; color:#5d7390; text-align:center; box-shadow:none; }
+html#ht_brw #detree, html#ht_brw #visdir, html#ht_brw #filetree { font-size:0; }
+html#ht_brw #detree::after, html#ht_brw #visdir::after, html#ht_brw #filetree::after { font-size:11px; line-height:28px; }
+html#ht_brw #detree::after { content:'路径'; }
+html#ht_brw #visdir::after { content:'定位'; }
+html#ht_brw #filetree::after { content:'文本'; }
+html#ht_brw #treeul a { border-radius:7px; padding:4px 6px; }
+
+/* Expanded tools: consistent header, spacing, and controls. */
+html#ht_brw .opview.act { box-sizing:border-box; max-width:91.6%; margin:14px 4.2%; padding:26px 28px 28px; border:1px solid #e6ecf4; border-radius:20px; background:#fff; box-shadow:0 10px 32px #334d710c; color:#56667a; line-height:1.75; }
+html#ht_brw #op_up2k.act { padding:26px 28px 28px; }
+html#ht_brw .opview > .lan-panel-intro { display:flex; box-sizing:border-box; width:100%; align-items:center; gap:15px; margin:0 0 24px; padding:0 0 21px; border:0; border-bottom:1px solid #edf1f5; }
+.lan-panel-icon { flex:none; display:grid; place-items:center; width:46px; height:46px; border:1px solid #deebfb; border-radius:14px; background:linear-gradient(145deg,#f1f7ff,#e8f2ff); color:#3a7dd7; font-size:21px; line-height:1; }
+.lan-panel-copy { flex:1; min-width:0; }
+.lan-panel-eyebrow { margin-bottom:3px; color:#86a1c2; font-size:10px; font-weight:700; letter-spacing:.09em; }
+.lan-panel-copy h2 { margin:0; color:#1d2b40; font-size:19px; font-weight:700; letter-spacing:-.02em; line-height:1.3; }
+.lan-panel-copy p { margin:5px 0 0; color:#91a0b2; font-size:12px; line-height:1.5; }
+html#ht_brw .opview .lan-panel-close { flex:none; appearance:none; border:1px solid #e5ebf2; border-radius:10px; padding:8px 13px; background:#f9fafc; color:#7a899b; font-family:inherit; font-weight:600; font-size:12px; cursor:pointer; box-shadow:none; }
+html#ht_brw .opview .lan-panel-close:hover { background:#eef3f9; color:#34506f; }
+html#ht_brw .opview p { margin:12px 0; }
+html#ht_brw .opview a { color:#347bd2; text-shadow:none; }
+html#ht_brw .opview a:hover { color:#155cb6; }
+html#ht_brw .opview input[type=text], html#ht_brw .opview input[type=search], html#ht_brw .opview select { box-sizing:border-box; min-height:40px; padding:9px 12px; border:1px solid #dfe7f0; border-radius:10px; background:#fbfcfe; color:#293b52; font-size:13px; box-shadow:none; }
+html#ht_brw .opview input[type=text]:focus, html#ht_brw .opview select:focus { border-color:#8abaf2; outline:none; box-shadow:0 0 0 3px #ddecff; }
+html#ht_brw .opview input[type=submit] { min-height:40px; padding:9px 17px; border:0; border-radius:10px; background:#2875df; color:white; font-size:13px; font-weight:600; cursor:pointer; }
+html#ht_brw .opview input[type=submit]:hover { background:#1765cb; }
+html#ht_brw .opview form { line-height:2.4; }
+html#ht_brw #op_mkdir form, html#ht_brw #op_new_md form, html#ht_brw #op_msg form { padding:8px 0; }
+html#ht_brw #op_mkdir input[type=text], html#ht_brw #op_new_md input[type=text], html#ht_brw #op_msg input[type=text] { width:min(360px,70%); margin:0 9px; }
+html#ht_brw #op_bup input[type=file] { max-width:100%; padding:14px; border:1px dashed #c8d9ed; border-radius:12px; background:#f8fbff; }
+html#ht_brw #op_bup input[type=file]::file-selector-button { margin-right:12px; padding:9px 14px; border:1px solid #dde8f6; border-radius:9px; background:#fff; color:#376ba8; cursor:pointer; }
+html#ht_brw #op_bup input[type=submit] { margin-top:12px; }
+
+/* Upload history: leave native links and dynamic results untouched. */
+html#ht_brw #op_unpost { font-size:13px; }
+html#ht_brw #op_unpost > p { margin:13px 0; color:#718198; }
+html#ht_brw #op_unpost #unpost_filt { width:min(280px,55%); margin:0 9px; }
+html#ht_brw #op_unpost #unpost { margin-top:22px; padding:18px 20px; border:1px solid #ebeff5; border-radius:13px; background:#f8fafc; color:#79899b; }
+html#ht_brw #op_unpost #unpost p { margin:4px 0; }
+html#ht_brw #op_unpost #unpost p b { color:#b16a21; }
+html#ht_brw #op_unpost #unpost em { display:inline-block; padding:16px 0 2px; color:#98a7b8; font-style:normal; }
+html#ht_brw #op_unpost #unpost table { width:100%; border-collapse:collapse; }
+html#ht_brw #op_unpost #unpost td, html#ht_brw #op_unpost #unpost th { padding:10px; border-bottom:1px solid #e8eef5; }
+
+/* Resumable upload area and its native queue. */
+html#ht_brw #u2conf { margin:0 0 18px; color:#8290a2; font-size:12px; }
+html#ht_brw #u2conf label { min-height:36px; box-sizing:border-box; border:1px solid #e8edf4; border-radius:10px; background:#f7f9fc; color:#68788c; }
+html#ht_brw #u2conf input:checked + label { border-color:#bdd7fa; background:#e9f2ff; color:#216bd0; }
+html#ht_brw #nthread { border:1px solid #e3eaf2; background:#fff; color:#485b72; }
+html#ht_brw #nthread_sub, html#ht_brw #nthread_add { border-radius:7px; background:#f1f5fa; color:#5b789e; }
+html#ht_brw #u2btn_ct { width:100%; }
+html#ht_brw #u2btn { box-sizing:border-box; width:100%; min-height:138px; padding:34px 24px; border:1.5px dashed #bfd5ef; border-radius:15px; background:linear-gradient(135deg,#f8fbff,#f3f8ff); color:#7089a7; font-size:13px; line-height:1.8; transition:background .15s,border-color .15s; }
+html#ht_brw #u2btn:hover, html#ht_brw #u2btn:focus { border-color:#6da7e9; background:#eef6ff; }
+html#ht_brw #u2bm { color:#2570d4; }
+html#ht_brw #u2cards { margin:18px 0 10px; }
+html#ht_brw #u2cards a { margin-right:4px; padding:8px 11px; border-radius:9px; background:#f6f8fb; color:#8290a2; }
+html#ht_brw #u2cards a.act { background:#eaf2ff; color:#226bca; }
+html#ht_brw #u2tabw { border:1px solid #ebeff5; border-radius:12px; overflow:auto; }
+html#ht_brw #u2tab { border-collapse:collapse; font-size:12px; }
+html#ht_brw #u2tab td { padding:11px 12px; border-bottom:1px solid #edf1f5; }
+html#ht_brw #u2tab thead td { background:#f8fafc; color:#8390a1; }
+html#ht_brw #u2etaw { color:#8a98a9; font-size:12px; }
+
+/* Settings retain original toggles, arranged as quiet rounded controls. */
+html#ht_brw #op_cfg h3 { margin:24px 0 10px; color:#35465b; font-size:14px; }
+html#ht_brw #op_cfg .tgl, html#ht_brw #op_cfg .btn { display:inline-block; margin:4px; padding:8px 12px; border:1px solid #e5ebf2; border-radius:9px; background:#f8fafc; color:#62758b; box-shadow:none; text-shadow:none; }
+html#ht_brw #op_cfg .tgl:hover, html#ht_brw #op_cfg .btn:hover { background:#eef5ff; color:#276ec7; }
+html#ht_brw #op_cfg .tgl.on, html#ht_brw #op_cfg .tgl.act { border-color:#c5dcf9; background:#eaf3ff; color:#246ccc; }
+/* Secondary features stay accessible in deliberately quiet, expandable groups. */
+html#ht_brw .lan-more-button { flex:none; appearance:none; min-height:38px; padding:6px 13px; border:0; border-radius:10px; background:#f6f8fb; color:#687a90; font-size:13px; font-weight:600; cursor:pointer; }
+html#ht_brw .lan-more-button::after { content:'  ⌄'; }
+html#ht_brw .lan-more-button:hover, html#ht_brw .lan-more-button[aria-expanded=true] { background:#eaf2ff; color:#226dce; }
+html#ht_brw .lan-advanced-group { margin:10px 0; border:1px solid #e9eef5; border-radius:13px; background:#fbfcfe; overflow:hidden; }
+html#ht_brw .lan-advanced-group > summary { position:relative; display:flex; align-items:center; min-height:49px; box-sizing:border-box; padding:13px 48px 13px 17px; list-style:none; color:#42556d; font-size:13px; font-weight:600; cursor:pointer; }
+html#ht_brw .lan-advanced-group > summary::-webkit-details-marker { display:none; }
+html#ht_brw .lan-advanced-group > summary::after { content:'+'; position:absolute; right:18px; top:50%; transform:translateY(-50%); color:#94a4b7; font-size:19px; font-weight:400; }
+html#ht_brw .lan-advanced-group[open] > summary { border-bottom:1px solid #eaf0f6; background:#f7faff; color:#286fca; }
+html#ht_brw .lan-advanced-group[open] > summary::after { content:'−'; color:#6093d1; }
+html#ht_brw .lan-advanced-group > :not(summary) { margin:0; padding:16px 18px; }
+html#ht_brw #op_player .lan-advanced-group h3, html#ht_brw #op_cfg .lan-advanced-group h3 { display:none; }
+html#ht_brw #wtoggle a { border-radius:8px; }
+html#ht_brw #wfm a { color:#276ccc; }
+html#ht_brw #modalc { border:1px solid #e5ebf2; border-radius:18px; background:#fff; box-shadow:0 24px 70px #223a5a35; }
+html#ht_brw :focus-visible { outline:2px solid #4388e6; outline-offset:3px; }
+@media (max-width:700px) {
+  html#ht_brw #lan-brand { padding:20px 5% 16px; }
+  html#ht_brw #ops { padding:6px; }
+  html#ht_brw #ops a { padding:6px 10px; }
+  html#ht_brw #lan-intro { display:block; min-height:0; padding:23px; }
+  #lan-intro h1 { font-size:25px; }
+  #lan-intro .lan-actions { margin-top:18px; }
+  html#ht_brw #wrap { padding:17px 15px 24px; }
+  html#ht_brw .opview.act, html#ht_brw #op_up2k.act { margin:12px 5%; max-width:90%; padding:19px 17px; }
+  .lan-panel-intro { gap:11px; margin-bottom:18px; }
+  .lan-panel-icon { width:40px; height:40px; border-radius:12px; }
+  .lan-panel-copy h2 { font-size:17px; }
+  .lan-panel-copy p { font-size:11px; }
+  html#ht_brw .opview .lan-panel-close { padding:7px 9px; }
+  html#ht_brw #u2conf { display:block; width:100%; overflow-x:auto; }
+  html#ht_brw #u2btn { min-height:120px; padding:26px 15px; }
+}

@@ -1,0 +1,183 @@
+<script nonce="{{ js_nonce }}">
+(function () {
+  function translate() {
+    var labels = {lead: '操作', href: '文件名', sz: '大小', ext: '类型', ts: '日期'};
+    Object.keys(labels).forEach(function (key) {
+      var element = document.querySelector('#files th[name="' + key + '"] > span');
+      if (element && element.textContent !== labels[key]) element.textContent = labels[key];
+    });
+    document.querySelectorAll('#acc_info > span:not(#srv_info2)').forEach(function (element) {
+      if (element.textContent === 'Read-Write-Move-Delete 权限') element.textContent = '查看、上传、修改和删除权限';
+    });
+    var disk = document.querySelector('#srv_info2 > span:nth-child(2)');
+    if (disk) {
+      var next = disk.textContent.replace(/([\d.]+\s+\w+) free of ([\d.]+\s+\w+)/, '可用 $1 / 总计 $2');
+      if (disk.textContent !== next) disk.textContent = next;
+    }
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    translate();
+    new MutationObserver(translate).observe(document.body, {childList: true, subtree: true});
+  });
+})();
+</script>
+
+<style>
+/* Local-area share: calm, light Finder-inspired skin. Copyparty controls remain functional. */
+html#ht_brw {
+  color-scheme: light;
+  --font-main: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei UI', sans-serif;
+  --fg:#303a49; --fg-max:#162130; --fg2-max:#162130; --fg-weak:#738094;
+  --bg:#fff; --bgg:#f4f6f9; --bg-u1:#f8faff; --bg-u2:#f4f7fb; --bg-u3:#e9eef5; --bg-u4:#e3ebf5; --bg-u5:#d6dfea; --bg-u6:#c8d3e1; --bg-d1:#f3f7fc; --bg-d2:#eaf0f8; --bg-d3:#dce6f2; --bg-max:#fff;
+  --a:#2375d8; --a-b:#2375d8; --a-hil:#135cab; --a-dark:#2175d2; --a-gray:#738094; --tab-alt:#4c5d74; --row-alt:#fff;
+  --btn-fg:#40516a; --btn-bg:#f1f5fa; --btn-h-fg:#1b66bd; --btn-h-bg:#e5effd; --btn-1-fg:#fff; --btn-1-bg:#287ce3; --btn-1h-bg:#1767c7;
+  --tree-bg:#f2f5f9; --srv-1:#738094; --srv-2:#9aa6b5; --srv-3:#287ce3; --txt-bg:#fff; --txt-sh:#d2dbe6; --chk-fg:#47576d;
+  --op-aa-fg:#1c67c7; --op-aa-bg:#e5effd; --op-a-sh:transparent; --f-h-b1:#e7edf4; --f-gray:#8b98a9; --f-sel-sh:#7db3f3;
+  --g-sel-fg:#173b6f; --g-sel-bg:#dbeafe; --g-sel-b1:#90bff9; --g-fsel-bg:#cce2ff; --g-fsel-ts:transparent;
+  --sz-b:#7c899c; --sz-k:#7c899c; --sz-m:#7c899c; --sz-g:#7c899c; --sz-t:#7c899c;
+  background:#f4f6f9; color:#253247; text-shadow:none; font-size:15px;
+}
+html#ht_brw body { margin:0 auto; padding:0 0 50px; min-width:0; max-width:1600px; }
+html#ht_brw #lan-brand { box-sizing:border-box; display:flex; align-items:center; gap:12px; padding:25px 4.2% 17px; }
+#lan-brand .lan-logo { width:42px; height:42px; flex:none; display:grid; place-items:center; border-radius:13px; color:white; font-size:21px; background:linear-gradient(145deg,#62b5fb,#257ae0); box-shadow:0 6px 16px #2a7bd633; }
+#lan-brand .lan-logo svg { width:24px; height:24px; }
+#lan-brand .lan-brand-title { color:#1d2939; font-size:16px; font-weight:700; letter-spacing:.01em; }
+#lan-brand .lan-brand-sub { color:#8a97a7; font-size:12px; margin-top:4px; }
+#lan-brand .lan-brand-status { margin-left:auto; margin-right:245px; color:#75869b; font-size:12px; display:flex; align-items:center; gap:7px; }
+#lan-brand .lan-brand-status span { width:7px; height:7px; border-radius:50%; background:#50bd87; box-shadow:0 0 0 4px #e6f6ee; }
+html#ht_brw #srv_info, html#ht_brw #acc_info { top:30px; background:transparent; font-size:12px; color:#8c99aa; }
+html#ht_brw #srv_info { display:none; }
+html#ht_brw #acc_info { right:4.2%; }
+html#ht_brw #ops { box-sizing:border-box; display:flex; align-items:center; gap:5px; overflow-x:auto; white-space:nowrap; margin:0 4.2%; padding:7px 10px; border:1px solid #e0e7ef; border-radius:13px; background:rgba(255,255,255,.88); box-shadow:0 4px 16px rgba(38,61,91,.04); }
+html#ht_brw #ops a { flex:none; display:inline-flex; align-items:center; justify-content:center; min-width:36px; min-height:36px; box-sizing:border-box; color:#53667c; padding:4px 8px; border:0; border-radius:9px; text-shadow:none; box-shadow:none; }
+html#ht_brw #ops a:hover, html#ht_brw #ops a.act { color:#1768c9; background:#e9f2ff; border:0; box-shadow:none; }
+html#ht_brw #ops > a { font-size:0; }
+html#ht_brw #ops > a::after { font-size:12px; font-weight:600; }
+html#ht_brw #opa_x::after { content:'收起'; }
+html#ht_brw #opa_srch::after { content:'搜索'; }
+html#ht_brw #opa_del::after { content:'上传记录'; }
+html#ht_brw #opa_up::after { content:'上传文件'; }
+html#ht_brw #opa_bup::after { content:'基础上传'; }
+html#ht_brw #opa_mkd::after { content:'新建文件夹'; }
+html#ht_brw #opa_md::after { content:'新建文本'; }
+html#ht_brw #opa_msg::after { content:'消息'; }
+html#ht_brw #opa_auc::after { content:'媒体'; }
+html#ht_brw #opa_cfg::after { content:'设置'; }
+html#ht_brw .opview.act { box-sizing:border-box; margin:12px 4.2%; padding:20px; max-width:91.6%; border:1px solid #e0e8f1; border-radius:16px; background:#fff; box-shadow:0 10px 30px rgba(30,61,105,.06); color:#35465c; }
+html#ht_brw #op_up2k.act { padding:20px; }
+html#ht_brw #u2btn { box-sizing:border-box; min-width:230px; padding:20px 24px; border:1px dashed #94b9e8; border-radius:12px; color:#3974b9; background:#f3f8ff; box-shadow:none; text-shadow:none; font-size:13px; line-height:1.6; }
+html#ht_brw #u2btn:hover { background:#eaf3ff; border-color:#3784df; }
+html#ht_brw #u2bm { color:#1d69c6; text-shadow:none; font-size:0; }
+html#ht_brw #u2bm sup { font-size:13px; }
+html#ht_brw #u2conf label { border-radius:10px; box-shadow:none; font-size:0; width:auto; min-width:34px; height:auto; line-height:18px; padding:9px 11px; white-space:nowrap; text-shadow:none; color:#53667c; }
+html#ht_brw #u2conf input:checked + label { color:#fff; background:#287ce3; text-shadow:none; }
+html#ht_brw #u2conf label::before { font-size:12px; }
+html#ht_brw #u2conf label[for=multitask]::before { content:'并行'; }
+html#ht_brw #u2conf label[for=potato]::before { content:'简化'; }
+html#ht_brw #u2conf label[for=u2rand]::before { content:'随机名'; }
+html#ht_brw #u2conf label[for=u2ow]::before { content:'覆盖设置'; }
+html#ht_brw #nthread_sub, html#ht_brw #nthread_add { background:#eaf1fa; color:#3774bd; border:0; text-shadow:none; }
+html#ht_brw #u2cards a { color:#73849a; border-radius:8px; box-shadow:none; font-size:0; line-height:18px; padding:6px 8px; }
+html#ht_brw #u2cards a::before, html#ht_brw #u2cards a span { font-size:12px; }
+html#ht_brw #u2cards a[act=ok]::before { content:'成功 '; }
+html#ht_brw #u2cards a[act=ng]::before { content:'失败 '; }
+html#ht_brw #u2cards a[act=done]::before { content:'完成 '; }
+html#ht_brw #u2cards a[act=bz]::before { content:'进行中 '; }
+html#ht_brw #u2cards a[act=q]::before { content:'等待 '; }
+html#ht_brw #u2cards a.act { color:#2167bb; background:#e9f2ff; box-shadow:none; }
+html#ht_brw .opview input[type=text], html#ht_brw .opview select { color:#27364a; background:#fff; border:1px solid #d6e0ec; border-radius:8px; padding:8px 10px; }
+html#ht_brw .opview button, html#ht_brw .opview input[type=submit] { border:0; border-radius:9px; background:#287ce3; color:#fff; padding:9px 15px; cursor:pointer; box-shadow:none; text-shadow:none; }
+html#ht_brw #path { box-sizing:border-box; margin:18px 4.2% 0; padding:8px 12px; border:1px solid #e2e9f1; border-radius:10px; background:#fff; color:#64748a; font-size:13px; text-shadow:none; box-shadow:none; }
+html#ht_brw #path i { background:none; border-color:#afbccb; width:.55em; height:.55em; }
+html#ht_brw #lan-intro { box-sizing:border-box; position:relative; margin:24px 4.2% 0; padding:30px 32px; border:1px solid #dce7f4; border-radius:19px; background:linear-gradient(112deg,#fff 15%,#f2f8ff 67%,#e7f2ff); box-shadow:0 9px 28px rgba(53,92,145,.055); }
+#lan-intro .lan-eyebrow { font-size:11px; font-weight:700; letter-spacing:.14em; color:#4385cf; }
+#lan-intro h1 { margin:10px 0 8px; font-size:clamp(25px,3vw,34px); line-height:1.2; font-weight:700; color:#1e2a3a; letter-spacing:-.035em; }
+#lan-intro p { margin:0; color:#7b899d; font-size:14px; line-height:1.6; }
+#lan-intro .lan-actions { display:flex; flex-wrap:wrap; gap:10px; margin-top:21px; }
+#lan-intro .lan-actions button { appearance:none; padding:10px 16px; border:1px solid #dce5ef; border-radius:10px; background:#fff; color:#41536a; font-size:13px; font-weight:600; cursor:pointer; box-shadow:0 2px 6px rgba(41,61,90,.05); }
+#lan-intro .lan-actions button.lan-upload { color:#fff; border-color:#287ce3; background:#287ce3; box-shadow:0 4px 11px #287ce333; }
+#lan-intro .lan-actions button:hover { filter:brightness(.97); }
+html#ht_brw #wrap { box-sizing:border-box; min-height:300px; margin:16px 4.2% 0; padding:24px 26px 30px; background:#fff; border:1px solid #e5eaf1; border-radius:17px; box-shadow:0 9px 28px rgba(30,61,105,.04); overflow-x:auto; }
+html#ht_brw #files { width:100%; top:0; border-collapse:collapse; color:#34445a; font-size:13px; }
+html#ht_brw #files thead th { position:static; text-align:left; color:#95a1b1; font-size:12px; font-weight:600; padding:12px 10px; background:#fff; border-bottom:1px solid #eaf0f6; box-shadow:none; }
+html#ht_brw #files td, html#ht_brw #files tr:nth-child(n) td { padding:13px 10px; color:#4e5d70; background:#fff; border-bottom:1px solid #f0f3f7; box-shadow:none; }
+html#ht_brw #files tbody tr:hover td { background:#f4f8fe; }
+html#ht_brw #files tbody tr.sel td { background:#e5f0ff; color:#174f91; }
+html#ht_brw #files a { color:#344c6b; text-decoration:none; }
+html#ht_brw #files a:hover { color:#176cca; background:transparent; }
+html#ht_brw #epi { color:#93a1b2; font-size:14px; padding:28px 10px; }
+html#ht_brw #tree { background:#f3f6fa; border-radius:0 14px 14px 0; box-shadow:none; border:1px solid #e4eaf2; color:#607188; }
+html#ht_brw #treeh, html#ht_brw #treepar { background:#edf2f8; border-color:#dce5ef; }
+html#ht_brw #tree ul a.hl, html#ht_brw #tree ul a.sel { color:#1768c9; background:#dcecff; box-shadow:none; }
+html#ht_brw #wfp { margin-top:28px; font-size:13px; font-weight:500; }
+html#ht_brw #wfp a, html#ht_brw #repl { color:#708198; }
+html#ht_brw #modalc { border:1px solid #e2e9f2; border-radius:17px; box-shadow:0 20px 70px #1b2e4b40; }
+html#ht_brw #modalb a { border-radius:9px; }
+html#ht_brw :focus-visible { outline:2px solid #287ce3; outline-offset:2px; }
+@media (max-width: 700px) {
+  html#ht_brw #lan-brand { padding:18px 5% 13px; }
+  #lan-brand .lan-brand-status { margin-right:0; }
+  html#ht_brw #srv_info, html#ht_brw #acc_info { position:static; margin:6px 5%; white-space:normal; }
+  html#ht_brw #ops { margin:0 5%; }
+  html#ht_brw #lan-intro { margin:18px 5% 0; padding:24px 21px; }
+  html#ht_brw #tree { position:relative !important; left:auto !important; top:auto !important; width:auto !important; height:auto !important; max-height:150px; margin:12px 5% 0; border-radius:12px; }
+  html#ht_brw #wrap { margin-right:5%; margin-left:5% !important; width:auto !important; padding:18px 15px 24px; }
+  html#ht_brw .opview.act { margin:10px 5%; max-width:90%; padding:14px; overflow-x:auto; }
+  html#ht_brw #files { min-width:490px; }
+}
+
+</style>
+<script nonce="{{ js_nonce }}">
+(function () {
+  function addInterface() {
+    var ops = document.getElementById('ops');
+    var wrap = document.getElementById('wrap');
+    if (!ops || !wrap || document.getElementById('lan-brand')) return;
+
+    var brand = document.createElement('div');
+    brand.id = 'lan-brand';
+    brand.innerHTML = '<div class="lan-logo" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M3.5 7.5A2.5 2.5 0 0 1 6 5h3.2c.6 0 1.1.2 1.5.6l1.1 1.1c.4.4.9.6 1.5.6H18A2.5 2.5 0 0 1 20.5 9.8v7.7A2.5 2.5 0 0 1 18 20H6a2.5 2.5 0 0 1-2.5-2.5v-10Z" fill="currentColor" opacity=".35"/><path d="M3.5 10A2.5 2.5 0 0 1 6 7.5h12a2.5 2.5 0 0 1 2.5 2.5v7.5A2.5 2.5 0 0 1 18 20H6a2.5 2.5 0 0 1-2.5-2.5V10Z" fill="currentColor"/></svg></div><div><div class="lan-brand-title">共享空间</div><div class="lan-brand-sub">LOCAL FILES</div></div><div class="lan-brand-status"><span></span>局域网已连接</div>';
+    ops.parentNode.insertBefore(brand, ops);
+
+    var intro = document.createElement('section');
+    intro.id = 'lan-intro';
+    intro.innerHTML = '<div class="lan-intro-copy"><div class="lan-eyebrow">共享空间 <span>/</span> 所有文件</div><h1>所有文件</h1><p>在一个地方，轻松分享与管理文件。</p></div><div class="lan-actions"><button type="button" class="lan-new"><span aria-hidden="true">＋</span> 新建文件夹</button><button type="button" class="lan-upload"><span aria-hidden="true">↑</span> 上传文件</button></div>';
+    wrap.parentNode.insertBefore(intro, wrap);
+    var previousPath = null;
+    function syncFolder() {
+      if (previousPath === location.pathname) return;
+      previousPath = location.pathname;
+      var parts = previousPath.split('/').filter(Boolean);
+      var folder = parts.length ? parts[parts.length - 1] : '所有文件';
+      try { folder = decodeURIComponent(folder); } catch (_) {}
+      intro.querySelector('h1').textContent = folder;
+      intro.querySelector('.lan-eyebrow').textContent = '共享空间 / ' + folder;
+    }
+    syncFolder();
+    new MutationObserver(syncFolder).observe(wrap, {childList: true, subtree: true});
+    window.addEventListener('popstate', syncFolder);
+    var widget = document.getElementById('wtoggle');
+    if (widget) {
+      function translateActions() {
+        var names = {'#fren span':'重命名', '#fdel span':'删除', '#fcut span':'剪切', '#fcpy span':'复制', '#fpst span':'粘贴', '#zip1 span':'打包', '#selall':'全选', '#selinv':'反选', '#selzip':'打包', '#seldl':'下载'};
+        Object.keys(names).forEach(function (selector) {
+          var target = widget.querySelector(selector);
+          if (target && target.textContent !== names[selector]) target.textContent = names[selector];
+        });
+      }
+      translateActions();
+      new MutationObserver(translateActions).observe(widget, {childList:true, subtree:true});
+    }
+    intro.querySelector('.lan-upload').addEventListener('click', function () {
+      var control = document.getElementById('opa_up');
+      if (control) control.click();
+    });
+    intro.querySelector('.lan-new').addEventListener('click', function () {
+      var control = document.getElementById('opa_mkd');
+      if (control) control.click();
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', addInterface);
+  else addInterface();
+})();
+</script>
