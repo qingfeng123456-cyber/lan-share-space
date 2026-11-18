@@ -4,6 +4,7 @@ copyparty.exe
 /data/
 /share/
 /shared/
+/共享文件/
 /.copyparty/
 
 # Local configuration and credentials
